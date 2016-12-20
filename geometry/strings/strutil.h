@@ -15,19 +15,11 @@
 #include <functional>
 using std::less;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_map>
-#else
-#include <hash_map>
-#endif
-using __gnu_cxx::hash_map;
+#include <unordered_map>
+using std::unordered_map;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_set>
-#else
-#include <hash_set>
-#endif
-using __gnu_cxx::hash_set;
+#include <unordered_set>
+using std::unordered_set;
 
 
 #include <set>
@@ -56,7 +48,7 @@ using std::vector;
 #include <ctype.h>      // not needed, but removing it will break the build
 
 using namespace std;
-using namespace __gnu_cxx;
+using namespace std;
 
 // A buffer size which is large enough for all the FastToBuffer functions, as
 // well as DoubleToBuffer and FloatToBuffer.  We define this here in case other

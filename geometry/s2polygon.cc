@@ -6,12 +6,8 @@ using std::max;
 using std::swap;
 using std::reverse;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_map>
-#else
-#include <hash_map>
-#endif
-using __gnu_cxx::hash_map;
+#include <unordered_map>
+using std::unordered_map;
 
 
 #include <set>
@@ -110,12 +106,7 @@ S2Polygon::~S2Polygon() {
 
 typedef pair<S2Point, S2Point> S2PointPair;
 
-#if defined __GNUC__ || defined __APPLE__
-#include<ext/hash_set>
-#else
-#include<hash_set>
-#endif
-namespace __gnu_cxx {
+namespace std {
 
 template<> struct hash<S2PointPair> {
   size_t operator()(S2PointPair const& p) const {
@@ -124,13 +115,13 @@ template<> struct hash<S2PointPair> {
   }
 };
 
-}  // namespace __gnu_cxx
+}  // namespace std
 
 
 bool S2Polygon::IsValid(const vector<S2Loop*>& loops) {
   // If a loop contains an edge AB, then no other loop may contain AB or BA.
   if (loops.size() > 1) {
-    hash_map<S2PointPair, pair<int, int> > edges;
+    unordered_map<S2PointPair, pair<int, int> > edges;
     for (int i = 0; i < loops.size(); ++i) {
       S2Loop* lp = loops[i];
       for (int j = 0; j < lp->num_vertices(); ++j) {

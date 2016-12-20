@@ -68,8 +68,10 @@ using std::string;
 
 using namespace std;
 using __gnu_cxx::hash;
-using __gnu_cxx::hash_set;
-using __gnu_cxx::hash_map;
+#include <unordered_set>
+using std::unordered_set;
+#include <unordered_map>
+using std::unordered_map;
 using __gnu_cxx::select1st;
 
 /* On Linux (and gdrive on OSX), this comes from places like

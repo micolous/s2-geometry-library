@@ -115,7 +115,7 @@ HASH_TO((intptr_t c),  static_cast<uint32>(Hash64NumWithSeed(c, MIX64) >> 32))
 
 
 // HASH_NAMESPACE_DECLARATION_START
-namespace __gnu_cxx {
+namespace std {
 
 #if defined(__GNUC__)
 // Use our nice hash function for strings
@@ -186,7 +186,7 @@ struct simple_insert_iterator {
 // SplitStringToIterator{Using|AllowEmpty}().
 template <typename T>
 struct simple_hash_map_iterator {
-  typedef hash_map<T, T> hashmap;
+  typedef unordered_map<T, T> hashmap;
   hashmap* t;
   bool even;
   typename hashmap::iterator curr;
@@ -271,8 +271,8 @@ void SplitStringAllowEmpty(const string& full, const char* delim,
 }
 
 void SplitStringToHashsetAllowEmpty(const string& full, const char* delim,
-                                    hash_set<string>* result) {
-  simple_insert_iterator<hash_set<string> > it(result);
+                                    unordered_set<string>* result) {
+  simple_insert_iterator<unordered_set<string> > it(result);
   SplitStringToIteratorAllowEmpty(full, delim, 0, it);
 }
 
@@ -283,7 +283,7 @@ void SplitStringToSetAllowEmpty(const string& full, const char* delim,
 }
 
 void SplitStringToHashmapAllowEmpty(const string& full, const char* delim,
-                                    hash_map<string, string>* result) {
+                                    unordered_map<string, string>* result) {
   simple_hash_map_iterator<string> it(result);
   SplitStringToIteratorAllowEmpty(full, delim, 0, it);
 }
@@ -377,8 +377,8 @@ void SplitStringUsing(const string& full,
 }
 
 void SplitStringToHashsetUsing(const string& full, const char* delim,
-                               hash_set<string>* result) {
-  simple_insert_iterator<hash_set<string> > it(result);
+                               unordered_set<string>* result) {
+  simple_insert_iterator<unordered_set<string> > it(result);
   SplitStringToIteratorUsing(full, delim, it);
 }
 
@@ -389,7 +389,7 @@ void SplitStringToSetUsing(const string& full, const char* delim,
 }
 
 void SplitStringToHashmapUsing(const string& full, const char* delim,
-                               hash_map<string, string>* result) {
+                               unordered_map<string, string>* result) {
   simple_hash_map_iterator<string> it(result);
   SplitStringToIteratorUsing(full, delim, it);
 }

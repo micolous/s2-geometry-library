@@ -10,12 +10,8 @@ using std::max;
 using std::swap;
 using std::reverse;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_map>
-#else
-#include <hash_map>
-#endif
-using __gnu_cxx::hash_map;
+#include <unordered_map>
+using std::unordered_map;
 
 #include <queue>
 using std::priority_queue;
@@ -68,7 +64,7 @@ static void CheckCovering(S2RegionCoverer const& coverer,
                           vector<S2CellId> const& covering,
                           bool interior) {
   // Keep track of how many cells have the same coverer.min_level() ancestor.
-  hash_map<S2CellId, int> min_level_cells;
+  unordered_map<S2CellId, int> min_level_cells;
   for (int i = 0; i < covering.size(); ++i) {
     int level = covering[i].level();
     EXPECT_GE(level, coverer.min_level());
@@ -79,7 +75,7 @@ static void CheckCovering(S2RegionCoverer const& coverer,
   if (covering.size() > coverer.max_cells()) {
     // If the covering has more than the requested number of cells, then check
     // that the cell count cannot be reduced by using the parent of some cell.
-    for (hash_map<S2CellId, int>::const_iterator i = min_level_cells.begin();
+    for (unordered_map<S2CellId, int>::const_iterator i = min_level_cells.begin();
          i != min_level_cells.end(); ++i) {
       EXPECT_EQ(i->second, 1);
     }

@@ -20,23 +20,15 @@ using std::multiset;
 using std::pair;
 using std::make_pair;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_map>
-#else
-#include <hash_map>
-#endif
-using __gnu_cxx::hash_map;
+#include <unordered_map>
+using std::unordered_map;
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_set>
-#else
-#include <hash_set>
-#endif
-using __gnu_cxx::hash_set;
+#include <unordered_set>
+using std::unordered_set;
 
 
 using namespace std;
-using namespace __gnu_cxx;
+using namespace std;
 
 // ----------------------------------------------------------------------
 // SplitStringAllowEmpty()
@@ -54,7 +46,7 @@ using namespace __gnu_cxx;
 void SplitStringAllowEmpty(const string& full, const char* delim,
                            vector<string>* res);
 void SplitStringToHashsetAllowEmpty(const string& full, const char* delim,
-                                    hash_set<string>* res);
+                                    unordered_set<string>* res);
 void SplitStringToSetAllowEmpty(const string& full, const char* delim,
                                 set<string>* res);
 // The even-positioned (0-based) components become the keys for the
@@ -63,7 +55,7 @@ void SplitStringToSetAllowEmpty(const string& full, const char* delim,
 // if the key was already present in the hash table, or will be the
 // empty string if the key is a newly inserted key.
 void SplitStringToHashmapAllowEmpty(const string& full, const char* delim,
-                                    hash_map<string, string>* result);
+                                    unordered_map<string, string>* result);
 
 // ----------------------------------------------------------------------
 // SplitStringUsing()
@@ -79,7 +71,7 @@ void SplitStringToHashmapAllowEmpty(const string& full, const char* delim,
 void SplitStringUsing(const string& full, const char* delim,
                       vector<string>* res);
 void SplitStringToHashsetUsing(const string& full, const char* delim,
-                               hash_set<string>* res);
+                               unordered_set<string>* res);
 void SplitStringToSetUsing(const string& full, const char* delim,
                            set<string>* res);
 // The even-positioned (0-based) components become the keys for the
@@ -88,7 +80,7 @@ void SplitStringToSetUsing(const string& full, const char* delim,
 // if the key was already present in the hash table, or will be the
 // empty string if the key is a newly inserted key.
 void SplitStringToHashmapUsing(const string& full, const char* delim,
-                               hash_map<string, string>* result);
+                               unordered_map<string, string>* result);
 
 // ----------------------------------------------------------------------
 // SplitOneIntToken()
