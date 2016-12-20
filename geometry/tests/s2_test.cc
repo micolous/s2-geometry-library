@@ -710,7 +710,7 @@ TEST(S2, S2PointHashSpreads) {
   int kTestPoints = 1 << 16;
   unordered_set<size_t> set;
   unordered_set<S2Point> points;
-  __gnu_cxx::hash<S2Point> hasher;
+  std::hash<S2Point> hasher;
   S2Point base = S2Point(1, 1, 1);
   for (int i = 0; i < kTestPoints; ++i) {
     // All points in a tiny cap to test avalanche property of hash
