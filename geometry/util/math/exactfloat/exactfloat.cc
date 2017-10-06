@@ -61,10 +61,21 @@ inline static uint64 BN_ext_get_uint64(const BIGNUM* bn) {
   return BN_get_word(bn);
 #else
   COMPILE_ASSERT(BN_BITS2 == 32, at_least_32_bit_openssl_build_needed);
-  if (bn->top == 0) return 0;
-  if (bn->top == 1) return BN_get_word(bn);
-  DCHECK_EQ(bn->top, 2);
-  return (static_cast<uint64>(bn->d[1]) << 32) + bn->d[0];
+  if(BN_is_zero(bn) == 1) return 0;
+  if(BN_num_bits() <= 32) return BN_get_word(bn);
+  DCHECK_EQ(BN_num_bits() <= 64, 2);
+  // Save the 32 high bits 33-64 in an unsigned long highbits:
+  BIGNUM *bn_highbits;
+  bn_highbits = BN_new();
+  BN_rshift(bn_highbits, bn, 32);
+  BN_ULONG highbits = BN_get_word(bn_highbits);
+  BN_free(bn_highbits);
+  // Truncate to the low 32 bits.
+  BIGNUM * bn_lowbits = BN_dup(bn);
+  BN_mask_bits(bn_lowbits, 32);
+  BN_ULONG lowbits = BN_get_word(bn_lowbits);
+  BN_free(bn_lowbits);
+  return (static_cast<uint64>(highbits) << 32) + lowbits;
 #endif
 }
 
@@ -72,16 +83,9 @@ inline static uint64 BN_ext_get_uint64(const BIGNUM* bn) {
 // sign).  Returns 0 if the argument is zero.
 static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   int count = 0;
-  for (int i = 0; i < bn->top; ++i) {
-    BN_ULONG w = bn->d[i];
-    if (w == 0) {
-      count += 8 * sizeof(BN_ULONG);
-    } else {
-      for (; (w & 1) == 0; w >>= 1) {
-        ++count;
-      }
-      break;
-    }
+  if(BN_is_zero(bn) == 1) return 0;
+  while (BN_is_bit_set(bn, count) == 0) {
+    ++count;
   }
   return count;
 }
