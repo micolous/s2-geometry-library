@@ -40,7 +40,7 @@ before_install:
   if [[ "${TRAVIS_OS_NAME}" == "osx" && OPENSSL1.1 == "true" ]]; then
     brew update
     brew install swig
-    brew outdated openssl || brew upgrade openssl
+    brew outdated openssl@1.1 || brew upgrade openssl@1.1
     brew outdated cmake || brew upgrade cmake
   fi
 - python -V
