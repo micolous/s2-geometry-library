@@ -30,14 +30,14 @@ matrix:
 
 before_install:
 - |
-  if [[ "${TRAVIS_OS_NAME}" == "osx" && OPENSSL_VER == "1.0" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" == "osx" && "${OPENSSL_VER}" == "1.0" ]]; then
     brew update
     brew install swig
     brew outdated openssl || brew upgrade openssl
     brew outdated cmake || brew upgrade cmake
   fi
 - |
-  if [[ "${TRAVIS_OS_NAME}" == "osx" && OPENSSL_VER == "1.1" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" == "osx" && "${OPENSSL_VER}" == "1.1" ]]; then
     brew update
     brew install swig
     brew outdated openssl@1.1 || brew upgrade openssl@1.1
