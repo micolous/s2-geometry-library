@@ -4,6 +4,9 @@
 # Add flags for openssl and Python on osx
 if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
 	export OPENSSL_ROOT_DIR="/usr/local/opt/openssl"
+    if [ "${OPENSSL_VER}" == "1.1" ]; then
+	    export OPENSSL_ROOT_DIR="/usr/local/opt/openssl@1.1"
+    fi
 	export PATH="/usr/bin:${PATH}"
 fi
 
