@@ -23,13 +23,24 @@ matrix:
       dist: trusty
     - os: osx
       compiler: clang
+      env: OPENSSL_VER="1.0"
+    - os: osx
+      compiler: clang
+      env: OPENSSL_VER="1.1"
 
 before_install:
 - |
-  if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" == "osx" && "${OPENSSL_VER}" == "1.0" ]]; then
     brew update
     brew install swig
     brew outdated openssl || brew upgrade openssl
+    brew outdated cmake || brew upgrade cmake
+  fi
+- |
+  if [[ "${TRAVIS_OS_NAME}" == "osx" && "${OPENSSL_VER}" == "1.1" ]]; then
+    brew update
+    brew install swig
+    brew install openssl@1.1
     brew outdated cmake || brew upgrade cmake
   fi
 - python -V
