@@ -1,5 +1,9 @@
 # s2-geometry-library
 
+**Not maintained anymore. Please use upstream fork
+https://github.com/yjwong/s2-geometry-library.**
+
+
 [![Build Status](https://travis-ci.org/micolous/s2-geometry-library.svg?branch=master)](https://travis-ci.org/micolous/s2-geometry-library)
 
 * License: Apache 2.0 (see `COPYING`)
@@ -21,7 +25,7 @@ You'll need the development (-dev or -devel) versions of these libraries in orde
 
 You'll need these build-time dependencies:
 
-- CMake
+- CMake 3.1 or later
 - SWIG (must be `swig` in your PATH)
 
 A C++ compiler supporting C++11 (g++ 4.8 or later, clang 3.3 or later) is also required.
