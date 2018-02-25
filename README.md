@@ -1,8 +1,18 @@
-# s2-geometry-library
+# This repository is no longer maintained!
 
-**Not maintained anymore. Please use upstream fork
-https://github.com/yjwong/s2-geometry-library.**
+**Please use one of the following forks instead:**
 
+* [Google repository](https://github.com/google/s2geometry)
+
+  This has the original developers exporting updates to Google's internal
+  version of S2 for general consumption.  See: https://s2geometry.io
+
+* [yjwong's repository](https://github.com/yjwong/s2-geometry-library)
+
+  Carries the patches I wrote for here. If you want to continue working on
+  this branch of the previous open source code drop, then go here.
+
+# Old README for s2-geometry-library
 
 [![Build Status](https://travis-ci.org/micolous/s2-geometry-library.svg?branch=master)](https://travis-ci.org/micolous/s2-geometry-library)
 
