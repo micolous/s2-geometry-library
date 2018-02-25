@@ -10,12 +10,8 @@ using std::reverse;
 
 #include <cstdio>
 
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_map>
-#else
-#include <hash_map>
-#endif
-using __gnu_cxx::hash_map;
+#include <unordered_map>
+using std::unordered_map;
 
 #include <sstream>
 #include <vector>
@@ -177,7 +173,7 @@ TEST(S2CellId, Tokens) {
 static const int kMaxExpandLevel = 3;
 
 static void ExpandCell(S2CellId const& parent, vector<S2CellId>* cells,
-                       hash_map<S2CellId, S2CellId>* parent_map) {
+                       unordered_map<S2CellId, S2CellId>* parent_map) {
   cells->push_back(parent);
   if (parent.level() == kMaxExpandLevel) return;
   int i, j, orientation;
@@ -201,7 +197,7 @@ static void ExpandCell(S2CellId const& parent, vector<S2CellId>* cells,
 
 TEST(S2CellId, Containment) {
   // Test contains() and intersects().
-  hash_map<S2CellId, S2CellId> parent_map;
+  unordered_map<S2CellId, S2CellId> parent_map;
   vector<S2CellId> cells;
   for (int face = 0; face < 6; ++face) {
     ExpandCell(S2CellId::FromFacePosLevel(face, 0, 0), &cells, &parent_map);

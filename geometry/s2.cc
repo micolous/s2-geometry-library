@@ -19,13 +19,8 @@ COMPILE_ASSERT(S2::kSwapMask == 0x01 && S2::kInvertMask == 0x02,
                masks_changed);
 
 static const uint32 MIX32 = 0x12b9b0a1UL;
-#if defined __GNUC__ || defined __APPLE__
-#include <ext/hash_set>
-#else
-#include <hash_set>
-#endif
 
-namespace __gnu_cxx {
+namespace std {
 
 
 
@@ -87,7 +82,7 @@ size_t hash<S2Point>::operator()(S2Point const& p) const {
 }
 
 
-}  // namespace __gnu_cxx
+}  // namespace std
 
 
 bool S2::IsUnitLength(S2Point const& p) {
